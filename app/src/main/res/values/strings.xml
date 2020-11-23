@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">InstagramCloneApp</string>
+    <string name="app_name">Instagram</string>
     <string name="title_home">Home</string>
     <string name="title_dashboard">New Post </string>
     <string name="title_notifications">Settings</string>
