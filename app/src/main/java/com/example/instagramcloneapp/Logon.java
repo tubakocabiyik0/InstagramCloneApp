@@ -2,14 +2,19 @@ package com.example.instagramcloneapp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.instagramcloneapp.ui.home.HomeFragment;
 import com.google.android.gms.tasks.OnCanceledListener;
 import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Logon extends AppCompatActivity {
@@ -34,6 +39,15 @@ public class Logon extends AppCompatActivity {
                 @Override
                 public void onFailure(@NonNull Exception e) {
                   Toast.makeText(getApplicationContext(),e.getLocalizedMessage(),Toast.LENGTH_LONG).show();
+                }
+            }).addOnSuccessListener(new OnSuccessListener<AuthResult>() {
+                @Override
+                public void onSuccess(AuthResult authResult) {
+                    HomeFragment homeFragment=new HomeFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    FragmentTransaction fragmentTransaction=fragmentManager.beginTransaction();
+                    fragmentTransaction.replace(R.id.logon,homeFragment).commit();
+
                 }
             });
 

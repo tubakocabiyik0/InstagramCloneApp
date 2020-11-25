@@ -40,6 +40,6 @@ public class AddFriend extends AppCompatActivity {
     }
 
     private void getUserMailFD() {
-  
+ 
     }
 }

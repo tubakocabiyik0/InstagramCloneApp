@@ -14,6 +14,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.instagramcloneapp.Adapter.PostsAdapter;
 import com.example.instagramcloneapp.R;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.EventListener;
@@ -31,7 +33,10 @@ public class HomeFragment extends Fragment {
     ArrayList userMailsFromFB;
     ArrayList imagesFromFB;
     FirebaseFirestore firebaseFirestore;
+    FirebaseAuth firebaseAuth;
+    FirebaseUser firebaseUser;
     PostsAdapter recyclerAdapter;
+    String userMAil;
     QueryDocumentSnapshot queryDocumentSnapshot;
     private HomeViewModel homeViewModel;
 
@@ -50,24 +55,29 @@ public class HomeFragment extends Fragment {
         userMailsFromFB = new ArrayList();
         imagesFromFB = new ArrayList();
         firebaseFirestore = FirebaseFirestore.getInstance();
+        firebaseAuth = FirebaseAuth.getInstance();
+        firebaseUser = firebaseAuth.getCurrentUser();
         getDatasFromFB();
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerAdapter = new PostsAdapter(commentsFromFB, imagesFromFB, userMailsFromFB);
-        recyclerView.setAdapter(recyclerAdapter);
+
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+            recyclerAdapter = new PostsAdapter(commentsFromFB, imagesFromFB, userMailsFromFB);
+            recyclerView.setAdapter(recyclerAdapter);
+
 
     }
 
     public void getDatasFromFB() {
+
         CollectionReference collectionReference = firebaseFirestore.collection("Post");
-        collectionReference.addSnapshotListener(new EventListener<QuerySnapshot>() {
+        collectionReference.whereEqualTo("userMail",firebaseUser.getEmail()).addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
             public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                 if (value != null) {
                     for (DocumentSnapshot documentSnapshot : value.getDocuments()) {
                         Map<String, Object> datas = documentSnapshot.getData();
                         String comment = (String) datas.get("comment");
-                        String userMAil = (String) datas.get("userMail");
+                        userMAil = (String) datas.get("userMail");
                         String image = (String) datas.get("url");
                         System.out.println(comment);
                         commentsFromFB.add(comment);
