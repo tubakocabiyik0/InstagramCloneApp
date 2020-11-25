@@ -33,6 +33,8 @@ public class Login extends AppCompatActivity {
         userName = findViewById(R.id.editTextTextPersonName);
         password = findViewById(R.id.editTextTextPassword);
         firebaseUser = firebaseAuth.getCurrentUser();
+       // finish();
+
         if (firebaseUser!= null) {
             Intent i = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(i);

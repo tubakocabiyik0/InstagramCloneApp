@@ -3,12 +3,9 @@
     package="com.example.instagramcloneapp">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-
     <uses-permission android:name="android.permission.CAMERA" />
 
-
     <application
-
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -16,6 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramCloneApp"
         android:usesCleartextTraffic="true">
+        <activity android:name=".ui.findUsers.AddFriend"></activity>
         <activity android:name=".Logon" />
         <activity android:name=".Login">
             <intent-filter>
@@ -26,7 +24,7 @@
         </activity>
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name"></activity>
+            android:label="@string/app_name" />
     </application>
 
 </manifest>
