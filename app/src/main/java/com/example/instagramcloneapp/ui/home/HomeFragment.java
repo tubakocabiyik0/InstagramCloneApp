@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.instagramcloneapp.Adapter.FindFriendAdapter;
 import com.example.instagramcloneapp.Adapter.PostsAdapter;
 import com.example.instagramcloneapp.R;
 import com.google.firebase.auth.FirebaseAuth;
